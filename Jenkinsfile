@@ -37,7 +37,7 @@ pipeline {
         stage('SonarCloud Analysis') {
             steps {
                 withSonarQubeEnv('SonarCloud') {
-                    withCredentials([string(credentialsId: 'sonarcloud-token', variable: 'SONAR_TOKEN')]) {
+                    withCredentials([string(credentialsId: 'SONARCLOUD_TOKEN', variable: 'SONAR_TOKEN')]) {
                         bat '"C:\\Windows\\System32\\cmd.exe" /c npx sonar-scanner -Dsonar.login=%SONAR_TOKEN%'
                     }
                 }
