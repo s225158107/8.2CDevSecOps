@@ -2,7 +2,7 @@ pipeline {
   agent any
 
   tools {
-    nodejs 'NodeJS 18'
+    nodejs 'NodeJS 18'  // Name must match Jenkins Global Tool config
   }
 
   stages {
@@ -33,6 +33,15 @@ pipeline {
     stage('NPM Audit (Security Scan)') {
       steps {
         bat 'npm audit || exit /b 0'
+      }
+    }
+
+
+    stage('SonarCloud Analysis') {
+      steps {
+        withSonarQubeEnv('SonarCloud') {
+          bat 'npx sonar-scanner'
+        }
       }
     }
   }
