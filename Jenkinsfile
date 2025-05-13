@@ -6,7 +6,7 @@ pipeline {
     }
 
     environment {
-        SONAR_TOKEN = credentials('sonarcloud-token') 
+        SONAR_TOKEN = credentials('SONARCLOUD_TOKEN') 
     }
 
     stages {
@@ -35,11 +35,9 @@ pipeline {
         }
 
         stage('SonarCloud Analysis') {
-    steps {
-        withSonarQubeEnv('SonarCloud') {
-            withCredentials([string(credentialsId: 'SONARCLOUD_TOKEN', variable: 'SONAR_TOKEN')]) {
-                bat "npx sonar-scanner -Dsonar.login=%SONAR_TOKEN%"
-                    }
+            steps {
+                withSonarQubeEnv('SonarCloud') {
+                    bat "npx sonar-scanner -Dsonar.login=%SONAR_TOKEN%"
                 }
             }
         }
