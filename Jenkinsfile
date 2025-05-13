@@ -2,7 +2,7 @@ pipeline {
   agent any
 
   tools {
-    nodejs 'NodeJS 18'  // Name must match Jenkins Global Tool config
+    nodejs 'NodeJS 18' 
   }
 
   stages {
@@ -40,7 +40,9 @@ pipeline {
     stage('SonarCloud Analysis') {
       steps {
         withSonarQubeEnv('SonarCloud') {
-          bat 'npx sonar-scanner'
+          withCredentials([string(credentialsId: 'SONARCLOUD_TOKEN', variable: 'SONAR_TOKEN')]) {
+            bat 'npx sonar-scanner -Dsonar.login=%SONAR_TOKEN%'
+          }
         }
       }
     }
