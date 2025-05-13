@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     tools {
-        nodejs 'NodeJS 18' 
+        nodejs 'NodeJS 18'
     }
 
     environment {
@@ -18,7 +18,7 @@ pipeline {
 
         stage('Run Tests') {
             steps {
-                bat 'npm test || exit /b 0' 
+                bat 'npm test || exit /b 0'
             }
         }
 
@@ -39,6 +39,7 @@ pipeline {
                 withSonarQubeEnv('SonarCloud') {
                     withCredentials([string(credentialsId: 'SONARCLOUD_TOKEN', variable: 'SONAR_TOKEN')]) {
                         bat 'C:\\Windows\\System32\\cmd.exe /c "npx sonar-scanner -Dsonar.login=%SONAR_TOKEN%"'
+                    }
                 }
             }
         }
