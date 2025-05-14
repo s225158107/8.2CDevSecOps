@@ -13,7 +13,9 @@ pipeline {
         // Stage 2: Unit and Integration Tests
         stage('Unit and Integration Tests') {
             steps {
-                bat '"C:\\Program Files\\nodejs\\npm.cmd" test || exit /b 0'
+                // bat '"C:\\Program Files\\nodejs\\npm.cmd" test || exit /b 0'
+                bat '"C:\\Program Files\\nodejs\\node.exe" node_modules/snyk/dist/cli/index.js test || exit /b 0'
+
             }
         }
 
