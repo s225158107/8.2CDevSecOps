@@ -13,9 +13,17 @@ pipeline {
         // Stage 2: Unit and Integration Tests
         stage('Unit and Integration Tests') {
             steps {
-                 bat '"C:\\Program Files\\nodejs\\npm.cmd" test || exit /b 0'
-               
-
+                bat '"C:\\Program Files\\nodejs\\npm.cmd" test || exit /b 0'
+            }
+            post {
+                always {
+                    emailext(
+                        subject: "Unit & Integration Tests - ${currentBuild.currentResult}",
+                        body: "Pipeline: ${env.JOB_NAME}\nBuild #: ${env.BUILD_NUMBER}\nStage: Unit & Integration Tests\nResult: ${currentBuild.currentResult}",
+                        to: "syyen@email.com",
+                        attachLog: true
+                    )
+                }
             }
         }
 
@@ -31,6 +39,16 @@ pipeline {
         stage('Security Scan') {
             steps {
                 bat '"C:\\Program Files\\nodejs\\npm.cmd" audit || exit /b 0'
+            }
+            post {
+                always {
+                    emailext(
+                        subject: "Security Scan - ${currentBuild.currentResult}",
+                        body: "Pipeline: ${env.JOB_NAME}\nBuild #: ${env.BUILD_NUMBER}\nStage: Security Scan\nResult: ${currentBuild.currentResult}",
+                        to: "syyen@email.com",
+                        attachLog: true
+                    )
+                }
             }
         }
 
