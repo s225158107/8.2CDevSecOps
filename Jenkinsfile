@@ -1,6 +1,10 @@
 pipeline {
     agent any
 
+        triggers {
+        pollSCM('H/1 * * * *') // Poll GitHub every 1 minute
+    }
+    
     stages {
         // Stage 1: Build – compile and install dependencies
         stage('Build') {
