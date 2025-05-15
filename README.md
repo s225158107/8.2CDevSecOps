@@ -214,4 +214,5 @@ In this application, the default `snyk wizard` answers will fix all the issues.
 When the wizard is done, restart the application and run the exploits again to confirm they are fixed.
 
  #   T r i g g e r i n g   J e n k i n s   p i p e l i n e   d e m o  
+ #   T e s t   S C M   P o l l i n g   T r i g g e r  
  
