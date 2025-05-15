@@ -231,3 +231,5 @@ When the wizard is done, restart the application and run the exploits again to c
  
  #   T r i g g e r   t e s t   w i t h   c r e d e n t i a l s  
  
+ #   F i n a l   t e s t   f o r   p o l l i n g  
+ 
